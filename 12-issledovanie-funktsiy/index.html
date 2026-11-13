@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>12 задание. Исследование функций — проверка ответов</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{--blue:#2175bd;--ink:#16334b;--pale:#eef7ff;--border:#cbdff2;--ok:#18764b;--error:#b42d42}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#f4f9fd;color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.wrap{max-width:900px;margin:auto;padding:24px 16px 110px}
+header{background:white;border-top:8px solid var(--blue);padding:24px 28px;border-radius:14px;box-shadow:0 3px 18px #20578012}
+h1{color:#1767a8;margin:0 0 7px;font-size:clamp(23px,4vw,32px);line-height:1.2}
+.sub{color:#5d7387;font-size:15px}.student{margin-top:15px}
+.student input{display:block;margin-top:6px;width:100%;max-width:340px}
+input{font:inherit;padding:11px 13px;border:1px solid #a4c9e9;border-radius:9px;background:white}
+input:focus{outline:3px solid #b9dfff;border-color:var(--blue)}
+.progress{margin:20px 0 6px;color:#55718c;font-size:14px}.bar{height:7px;background:#dae9f6;border-radius:8px;overflow:hidden}.fill{height:100%;background:var(--blue);width:0%;transition:width .2s}
+.question{background:#fff;border:1px solid var(--border);border-left:5px solid var(--blue);border-radius:11px;margin-top:15px;padding:18px 22px;box-shadow:0 2px 11px #2057800a}
+.num{font-size:14px;color:var(--blue);font-weight:700;margin-bottom:8px}
+.task{line-height:1.5;font-size:17px}
+.equation{padding:9px 0 11px;overflow-x:auto;font-size:1.14em}
+.question label{font-size:14px;color:#536a80;display:block;margin-bottom:5px}
+.answer{width:min(100%,290px);font-size:18px}
+.feedback{display:none;margin-top:10px;font-size:14px}
+.checked .feedback{display:block}.correct{border-left-color:var(--ok)}.wrong{border-left-color:var(--error)}.correct .feedback{color:var(--ok)}.wrong .feedback{color:var(--error)}
+.summary{display:none;margin:18px 0 22px;background:white;border:1px solid var(--border);padding:22px;border-radius:13px}
+.summary h2{margin:0;color:#1767a8}.score{font-size:28px;font-weight:800;color:var(--blue)}
+.controls{position:sticky;bottom:0;background:#fff;box-shadow:0 -4px 25px #174f7b20;border-top:1px solid var(--border);padding:12px max(16px,calc((100vw - 900px)/2));display:flex;gap:9px;flex-wrap:wrap;z-index:3;align-items:center}
+button{background:var(--blue);border:0;color:#fff;font:inherit;font-weight:700;padding:11px 16px;border-radius:9px;cursor:pointer}button.secondary{background:#e8f3fd;color:#1767a8}
+#count{font-size:13px;color:#536b7e;margin-right:auto}
+footer{text-align:center;margin:22px auto;color:#8192a1;font-size:12px}
+@media(max-width:520px){.wrap{padding:12px 9px 100px}.question{padding:15px 13px}.controls{padding:9px}.task{font-size:16px}.equation{font-size:1em}header{padding:19px}}
+</style></head><body><div class="wrap"><header>
+<h1>12 задание. Исследование функций</h1>
+<div class="sub"><b>Домашняя работа · 36 заданий</b></div>
+<p>Введите числовые ответы и нажмите «Проверить ответы». Дробную часть можно писать через запятую или точку. После проверки будут показаны ошибки, верные ответы и итоговый результат.</p>
+<label class="student">Имя ученика (необязательно)<input id="student" autocomplete="name" placeholder="Имя и фамилия"></label>
+</header><div class="progress"><span id="progress">Заполнено: 0 из 36</span></div><div class="bar"><div class="fill" id="fill"></div></div>
+<section id="summary" class="summary" aria-live="polite"></section><main id="questions"></main>
+<footer>Проверка ответов по заданию №12 · Профильная математика</footer></div>
+<div class="controls"><span id="count">36 заданий</span><button id="check">Проверить ответы</button><button id="copy" class="secondary" style="display:none">Скопировать результат</button><button id="reset" class="secondary">Начать заново</button></div>
+<script>
+const QUESTIONS=[["Найдите точку максимума функции","y=x^3-147x+11","-7"],["Найдите точку минимума функции","y=x^3-30x^2+17","20"],["Найдите точку максимума функции","y=x^3+20x^2+100x+23","-10"],["Найдите точку минимума функции","y=x^3-8x^2+16x+17","4"],["Найдите точку минимума функции","y=\\frac13x^{3/2}-3x+22","36"],["Найдите точку максимума функции","y=5+12x-2x^{3/2}","16"],["Найдите точку максимума функции","y=-\\frac13x\\sqrt{x}+2x+5","16"],["Найдите точку максимума функции","y=-\\frac43x\\sqrt{x}+12x+15","36"],["Найдите наибольшее значение функции на отрезке [140; 145]","y=-\\frac13x\\sqrt{x}+6x+7","295"],["Найдите наименьшее значение функции на отрезке [9; 36]","y=\\frac23x\\sqrt{x}-6x-5","-77"],["Найдите точку максимума функции","y=0{,}5x^2-7x+12\\ln x+8","3"],["Найдите точку минимума функции","y=1{,}5x^2-27x+42\\ln x-10","7"],["Найдите точку максимума функции","y=9\\ln(x-4)-9x-7","5"],["Найдите точку минимума функции","f(x)=\\log_{0{,}5}(x^3-3x)","-1"],["Найдите точку максимума функции","y=2\\ln(x+4)^3-8x-19","-3,25"],["Найдите наименьшее значение функции","y=\\log_{5}(x^2-12x+61)-10","-8"],["Найдите точку минимума функции","y=5x-\\ln(x+5)+7","-4,8"],["Найдите наибольшее значение функции на отрезке [1/24; 5/24]","y=\\ln(12x)-12x+16","15"],["Найдите наименьшее значение функции на отрезке [1/12; 5/12]","y=6x-\\ln(6x)+17","18"],["Найдите наибольшее значение функции на отрезке [-4,5; 0]","y=10\\ln(x+5)-10x-21","19"],["Найдите наибольшее значение функции на отрезке [-10,5; 0]","y=\\ln (x+11)^{12}-12x","120"],["Найдите наименьшее значение функции на отрезке [-9,5; 0]","y=10x-\\ln (x+10)^{10}","-90"],["Найдите точку минимума функции","y=(x+54)e^{x-54}","-55"],["Найдите точку минимума функции","y=(x^2-31x+31)e^{15-x}","2"],["Найдите точку минимума функции","y=(x+7)^2e^{14-x}","-7"],["Найдите точку максимума функции","y=(2x^2-26x+26)e^{17-x}","13"],["Найдите точку минимума функции","y=e^{-x}(x^2-3)","-1"],["Найдите точку максимума функции","y=(x+39)e^{39-x}","-38"],["Найдите точку максимума функции","y=\\log_2(-21-14x-x^2)-2","-7"],["Найдите точку минимума функции","y=\\log_5(x^2-30x+249)+8","15"],["Найдите наименьшее значение функции","y=\\log_4(x^2+14x+305)+9","13"],["Найдите наибольшее значение функции","y=\\log_5(-116+22x-x^2)-8","-7"],["Найдите наименьшее значение функции на отрезке [0; π/2]","y=3+\\frac{5\\pi}{4}-5x-5\\sqrt2\\cos x","-2"],["Найдите наибольшее значение функции на отрезке [-π/2; 0]","y=15x-3\\sin x+5","5"],["Найдите наибольшее значение функции на отрезке [0; 3π/2]","y=4\\cos x-20x+7","11"],["Найдите наименьшее значение функции на отрезке [-5π/6; 0]","y=14\\sin x+\\frac{72}{\\pi}x+26","-41"]];
+const main=document.getElementById('questions'),summary=document.getElementById('summary');
+main.innerHTML=QUESTIONS.map((q,i)=>'<article class="question" id="q'+(i+1)+'"><div class="num">Задание '+(i+1)+'</div><div class="task">'+q[0]+'</div><div class="equation">\\('+q[1]+'\\)</div><label for="a'+(i+1)+'">Ваш ответ</label><input class="answer" id="a'+(i+1)+'" inputmode="decimal" autocomplete="off" placeholder="Введите число"><div class="feedback" id="f'+(i+1)+'"></div></article>').join('');
+const inputs=Array.from(document.querySelectorAll('.answer'));
+function normalize(v){let s=v.trim().replace(/\s/g,'').replace(/[−–—]/g,'-').replace(',','.');if(s==='')return null;let n=Number(s);return Number.isFinite(n)?n:null}
+function updateProgress(){let n=inputs.filter(x=>x.value.trim()!=='').length;document.getElementById('progress').textContent='Заполнено: '+n+' из '+QUESTIONS.length;document.getElementById('fill').style.width=(100*n/QUESTIONS.length)+'%'}
+inputs.forEach(el=>el.addEventListener('input',()=>{updateProgress();let card=el.closest('.question');card.classList.remove('checked','correct','wrong');summary.style.display='none';document.getElementById('copy').style.display='none'}));
+let lastResult='';
+document.getElementById('check').addEventListener('click',()=>{
+let good=0,missing=0,wrong=[];
+QUESTIONS.forEach((q,i)=>{let el=inputs[i],box=el.closest('.question'),feedback=document.getElementById('f'+(i+1));box.classList.remove('correct','wrong');box.classList.add('checked');let a=normalize(el.value),b=normalize(q[2]),correct=a!==null&&Math.abs(a-b)<1e-8;if(correct){good++;box.classList.add('correct');feedback.textContent='✓ Верно'}else{box.classList.add('wrong');if(a===null)missing++;wrong.push(i+1);feedback.textContent=(a===null?'Ответ не указан. ':'Неверно. ')+'Правильный ответ: '+q[2]}});
+let name=document.getElementById('student').value.trim();summary.style.display='block';summary.innerHTML='<h2>Результат проверки</h2><div class="score">'+good+' из '+QUESTIONS.length+'</div><p>Верно: '+good+' · Ошибки: '+(QUESTIONS.length-good-missing)+' · Не заполнено: '+missing+'</p>'+(wrong.length?'<p>Проверьте задания: '+wrong.join(', ')+'</p>':'<p>Все задания решены правильно!</p>');
+lastResult=(name?name+' — ':'')+'12 задание. Исследование функций: '+good+' из '+QUESTIONS.length+'. Неверные или пропущенные: '+(wrong.join(', ')||'нет')+'.';document.getElementById('copy').style.display='';summary.scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.getElementById('copy').addEventListener('click',()=>{if(navigator.clipboard)navigator.clipboard.writeText(lastResult).then(()=>alert('Результат скопирован')).catch(()=>prompt('Скопируйте результат',lastResult));else prompt('Скопируйте результат',lastResult)});
+document.getElementById('reset').addEventListener('click',()=>{if(!confirm('Очистить все введённые ответы?'))return;inputs.forEach(el=>{el.value='';el.closest('.question').classList.remove('checked','correct','wrong')});summary.style.display='none';document.getElementById('copy').style.display='none';updateProgress();window.scrollTo({top:0,behavior:'smooth'})});
+</script></body></html>
